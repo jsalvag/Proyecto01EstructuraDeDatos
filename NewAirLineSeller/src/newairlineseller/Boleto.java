@@ -94,7 +94,7 @@ public class Boleto {
 
         System.out.println("Asiento");
         do{
-            System.out.print("Fila: ");
+            System.out.print("Linea: ");
             aux = br.readLine();
             fil = Integer.parseInt(aux);
             tarifa = tarifaBase(nVuel);
@@ -112,7 +112,7 @@ public class Boleto {
                     si = true;
                 }
             }else{
-                System.out.println("Fila invalida");
+                System.out.println("Linea invalida");
                 si = false;
             }
         }while(!si);
@@ -145,7 +145,7 @@ public class Boleto {
         String[] vuelo= man.buscar("vuelo", Vuel);
         String[] cliente= man.buscar("cliente", CI);
         System.out.println("\033[31m-----------------------------------------------------------");
-        System.out.println("\033[31mBoleto\t#\033[30m"+nBoleto+".\t\t\t\033[31mVuelo\t#\033[30m"+nVuel);
+        System.out.println("\033[31mBoleto\t#\033[30m"+Bol+".\t\t\t\033[31mVuelo\t#\033[30m"+nVuel);
         System.out.println("\033[31mNombre:\t\033[30m"+cliente[2]+", "+cliente[1]+"\t\t\033[31mFecha de Vuelo:\t\033[30m"+vuelo[1]);
         System.out.println("\033[31mCedula:\t\033[30m"+cliente[0]+"\t\t\033[31mHora de Vuelo:\t\033[30m"+vuelo[2]+".");
         System.out.println("\033[31mClase:\t\033[30m"+clase+"\t\033[31mAsiento:\033[30m"+asiento+"\t\033[31mPrecio:\t\033[30m"+tarifa);
@@ -160,6 +160,11 @@ public class Boleto {
         String[] vuelo= man.buscar("vuelo", n);
         
         while(true){
+            if(vuelo==null){
+                System.out.println("\033[31m-----------------------------------------------------------");
+                System.out.println("El vuelo #"+n+" no existe.");
+                break;
+            }
             String[] boleto = man.buscar("boletos"+n, Integer.toString(i));
             i++;
             if(boleto!=null){
@@ -183,8 +188,6 @@ public class Boleto {
                 System.out.println("\033[31mClase:\t\033[30m"+boleto[5]+"\t\033[31mAsiento:\033[30m"+lugar+"\t\033[31mPrecio:\t\033[30m"+boleto[6]);
                 System.out.println("\033[31mCiudad origen:\033[30m"+vuelo[3]+"\t\033[31mCiudad destino:\t\033[30m"+vuelo[4]);
             }else{
-                System.out.println("\033[31m-----------------------------------------------------------");
-                System.out.println("El vuelo #"+n+" no existe.");
                 break;
             }
             

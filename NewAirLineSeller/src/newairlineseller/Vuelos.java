@@ -72,10 +72,13 @@ public class Vuelos {
         String[] datos = man.buscar("vuelo", aux);
         //si la funcion buscar() devuelve un null significa que el archivo esta vacio
         if(datos!=null){
-            System.out.println("Vuelo #"+datos[0]);
-            System.out.println("Con fecha: "+datos[1]+" - a las "+datos[2]);
-            System.out.println("De "+datos[3]+" a "+datos[4]);
-            System.out.println("Con una tatira base de "+datos[5]);
+            System.out.println("\033[34m|------------------------------------|");
+            System.out.println("\033[34m|Vuelo #\033[31m"+datos[0]+"\033[34m\t\t\t     |");
+            System.out.println("\033[34m|Con fecha: \033[31m"+datos[1]+"\033[34m - a las \033[31m"+datos[2]+"\033[34m |");
+            System.out.println("\033[34m|De \033[31m"+datos[3]+"\033[34m a \033[31m"+datos[4]+"\033[34m\t\t\t     |");
+            System.out.println("\033[34m|Con una tatira base de \033[31m"+datos[5]+"\033[34m\t     |");
+            System.out.println("\033[34m|------------------------------------|");
+
         }else{
             System.out.println("Vuelo no encontrado...!");
         }
@@ -106,7 +109,6 @@ public class Vuelos {
  * en un vuelo. Se incican en color negro los asientos disponibles, y en
  * color rojo los asientos ocupados*/
         int i,j,x;
-        
         for(x=1; x<=16; x++){
             if(x<=9){
                 System.out.print("\033[32m |"+x+"| ");
@@ -147,6 +149,7 @@ public class Vuelos {
         }
         System.out.println("\033[32m-------------------------------------------------------------------------------");
         System.out.println("Lugares disponibles: \033[31m"+disp);
+        disp = 96;
     }
     
 }

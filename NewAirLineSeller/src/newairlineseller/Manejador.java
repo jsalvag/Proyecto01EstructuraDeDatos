@@ -128,11 +128,14 @@ public class Manejador {
         System.out.println("Litado de clientes");
         while((linea=brf.readLine())!=null){
             String[] datos = linea.split("-");
-            System.out.println("Cedula:\t\t"+datos[0]);
-            System.out.println("Nombre:\t\t"+datos[2]+" "+datos[1]);
-            System.out.println("Telefono:\t"+datos[3]+"\nDireccion:\t"+datos[4]);
-            System.out.println();
+            System.out.println("\033[34m--------------------------------------");
+            System.out.println("\033[34mCedula:\t\t\033[31m"+datos[0]);
+            System.out.println("\033[34mNombre:\t\t\033[31m"+datos[2]+" "+datos[1]);
+            System.out.println("\033[34mTelefono:\t\033[31m"+datos[3]);
+            System.out.println("\033[34mDireccion:\t\033[31m"+datos[4]);
         }
+            System.out.println("\033[34m--------------------------------------");
+
     }
     
     void leerArchivoVuelo() throws IOException{

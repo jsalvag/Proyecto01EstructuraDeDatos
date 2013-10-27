@@ -14,6 +14,8 @@ public class Menu {
     
     
     void menuPrincipal() throws IOException{
+        m.crear("vuelo");
+        m.crear("cliente");
         System.out.println("\033[35m-------------------------------------------------------------------------------");
         System.out.println("\033[35m----------------------------- BienVenido --------------------------------------");
         System.out.println("\033[35m----------------Sistema de venta de Boletos para JSalvaG Airlines--------------");
@@ -115,7 +117,13 @@ public class Menu {
                 case "4":
                     System.out.print("Numero de Vuelo aconsultar: ");
                     String nV = br.readLine();
-                    v.disponibilidad(nV);
+                    if(v.verificarVuelo(nV)){
+                        v.disponibilidad(nV);
+                    }else{
+                        System.out.println("\033[31m|---------------------------------|");
+                        System.out.println("\033[31m|El vuelo no existe en el registro|");
+                        System.out.println("\033[31m|---------------------------------|");
+                    }
                     break;
                 case "5":
                     salir = true;

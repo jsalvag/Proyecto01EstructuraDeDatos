@@ -1,4 +1,5 @@
-16825525-jose-guevara-04168995399-Porlamar
-3489436-marlenys-lunar-04164954232-porlamar
-65498765-juan-perez-98765432154-guatamare
-3213213-pedro-ruiz-98798798798-machupichu
+1000000-Pedro-Perez-04141111111-Hidraulica
+2000000-Ana-Perez-04142222222-Hidraulica
+3000000-Juan-Diaz-14161111111-Mecanica
+4000000-Camila-Rodriguez-04121111111-Asistida
+5000000-luis-garcia-02000000000-neumatica

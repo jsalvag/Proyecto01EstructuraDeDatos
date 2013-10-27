@@ -165,12 +165,13 @@ public class Cliente {
             if(man.validarCedula(aux)){
                 ci = aux;
                 String[] ver = man.buscar("cliente", ci);
-
+                
                 if (ver==null){
                     System.out.println("\033[31mCliente no encontrado...\033[30m");
                     si = true;
                 }else{
                     if(ver[0].equals(ci)){
+                        System.out.println("\033[31m--------------------------------------");
                         System.out.println("\033[30mNombre:\t\t\033[31m"+ver[1]);
                         nom = ver[1];
                         System.out.println("\033[30mApellido:\t\033[31m"+ver[2]);
@@ -180,6 +181,7 @@ public class Cliente {
                         System.out.println("\033[30mDireccion:\t\033[31m"+ver[4]);
                         dir = ver[4];
                         System.out.println("\033[31mCliente encontrado!!!\033[30m");
+                        System.out.println("\033[31m--------------------------------------");
                         si = true;
                     }else{
                         pedirDatos();

@@ -1,0 +1,1143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>NewAirLineSeller.java</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #000000; background-color: #ffffff; font-family: Monospaced}
+pre {color: #000000; background-color: #ffffff; font-family: Monospaced}
+table {color: #000000; background-color: #e9e8e2; font-family: Monospaced}
+.ST2 {font-family: Monospaced; font-weight: bold; font-style: italic}
+.ST1 {font-family: Monospaced; font-weight: bold}
+.ST0 {color: #969696; font-family: Monospaced; font-weight: bold}
+.comment {color: #969696}
+.keyword-directive {color: #0000e6}
+-->
+</style>
+</hed>
+<bod>
+<table width="100%"><tr><td align="center">NewAirLineSeller.java</td></tr></table>
+<pre>
+<span class="comment">/*Venta de boletos aéreos para JSalvaG Airlines con una flota de 10 aviones Boeing 373, con vuelos a las principales ciudades venezolanas:</span>
+<span class="comment"> * Caracas</span>
+<span class="comment"> * Porlamar</span>
+<span class="comment"> * Valencia</span>
+<span class="comment"> * Maracaibo</span>
+<span class="comment"> * Barcelona</span>
+<span class="comment"> * Barquisimeto</span>
+<span class="comment"> * Cada aeronave cuenta con 3 clases: VIP, Ejecutiva y turística.</span>
+<span class="comment"> */</span>
+<span class="keyword-directive">package</span> newairlineseller;
+
+<span class="keyword-directive">import</span> java.io.IOException;
+
+<span class="comment">/**</span>
+<span class="comment"> * </span><span class="ST0">@author</span> <span class="comment">JSalvaG</span>
+ <span class="comment">*/</span>
+<span class="keyword-directive">public</span> <span class="keyword-directive">class</span> <span class="ST1">NewAirLineSeller</span> {
+    
+    <span class="keyword-directive">public</span> <span class="keyword-directive">static</span> <span class="keyword-directive">void</span> <span class="ST2">main</span>(String[] args) <span class="keyword-directive">throws</span> IOException {
+        Menu menu = <span class="keyword-directive">new</span> Menu();
+        
+        menu.menuPrincipal();
+    }
+}
+</pre>
+<table width="100%"><tr><td align="center">Menu.java</td></tr></table>
+<pre>
+<span class="keyword-directive">package</span> newairlineseller;
+
+<span class="keyword-directive">import</span> java.io.BufferedReader;
+<span class="keyword-directive">import</span> java.io.IOException;
+<span class="keyword-directive">import</span> java.io.InputStreamReader;
+
+<span class="keyword-directive">public</span> <span class="keyword-directive">class</span> <span class="ST0">Menu</span> {
+    BufferedReader <span class="ST1">br</span> = <span class="keyword-directive">new</span> BufferedReader (<span class="keyword-directive">new</span> InputStreamReader(System.<span class="ST2">in</span>));
+    Cliente <span class="ST1">c</span> = <span class="keyword-directive">new</span> Cliente();
+    Manejador <span class="ST1">m</span> = <span class="keyword-directive">new</span> Manejador();
+    Vuelos <span class="ST1">v</span> = <span class="keyword-directive">new</span> Vuelos();
+    Boleto <span class="ST1">b</span> = <span class="keyword-directive">new</span> Boleto();
+    Reportes <span class="ST1">r</span> = <span class="keyword-directive">new</span> Reportes();
+    
+    
+    <span class="keyword-directive">void</span> <span class="ST0">menuPrincipal</span>() <span class="keyword-directive">throws</span> IOException{
+        <span class="ST1">m</span>.crear(<span class="character">&quot;</span><span class="character">vuelo</span><span class="character">&quot;</span>);
+        <span class="ST1">m</span>.crear(<span class="character">&quot;</span><span class="character">cliente</span><span class="character">&quot;</span>);
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[35m-------------------------------------------------------------------------------</span><span class="character">&quot;</span>);
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[35m----------------------------- BienVenido --------------------------------------</span><span class="character">&quot;</span>);
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[35m----------------Sistema de venta de Boletos para JSalvaG Airlines--------------</span><span class="character">&quot;</span>);
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[35m-------------------------------------------------------------------------------</span><span class="character">&quot;</span>);
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[35m-----------------------------Selecciones su accion-----------------------------</span><span class="character">&quot;</span>);
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[35m-------------------------------------------------------------------------------</span><span class="character">&quot;</span>);
+        <span class="keyword-directive">boolean</span> salir = <span class="keyword-directive">false</span>;
+        
+        <span class="keyword-directive">do</span>{
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\n</span><span class="character">1.-Gestion de Vuelos.</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">2.-Gestion de clientes.</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">3.-Gestion de boletos.</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">4.-Reportes.</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">5.-Salir.</span><span class="ST3">\n</span><span class="character">Seleccion: </span><span class="character">&quot;</span>);
+            
+            <span class="keyword-directive">switch</span> (<span class="ST1">br</span>.readLine()) {
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">1</span><span class="character">&quot;</span>: <span class="comment">//GEstion de vuelos...</span>
+                    subMenu2();
+                    <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">2</span><span class="character">&quot;</span>: 
+                    subMenu1();
+                    <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">3</span><span class="character">&quot;</span>: 
+                    subMenu3();
+                    <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">4</span><span class="character">&quot;</span>: 
+                    subMenu4();
+                    <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">5</span><span class="character">&quot;</span>: 
+                    salir = <span class="keyword-directive">true</span>; 
+                    System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Adios!!!</span><span class="character">&quot;</span>);
+                    <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">default</span>: 
+                    System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Opcion invalida.</span><span class="character">&quot;</span>); 
+                    <span class="keyword-directive">break</span>;
+            }
+        }<span class="keyword-directive">while</span>(!salir);
+    }
+    
+    <span class="keyword-directive">void</span> <span class="ST0">subMenu1</span>() <span class="keyword-directive">throws</span> IOException{
+        <span class="keyword-directive">boolean</span> salir = <span class="keyword-directive">false</span>;
+        <span class="keyword-directive">do</span>{
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">--------------------------------------</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">-   Registro y gestion de clientes   -</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">--------------------------------------</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">1.-Registrar Cliente Nuevo</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">2.-Buscar Cliente Registrado</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">3.-Ver lista de Clientes</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">4.-Regresar al menu anterior</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">--------------------------------------</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Opcion: </span><span class="character">&quot;</span>);
+            String op = <span class="ST1">br</span>.readLine();
+
+            <span class="keyword-directive">switch</span>(op){
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">1</span><span class="character">&quot;</span>:
+                    <span class="ST1">c</span>.crearCliente();
+                    <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">2</span><span class="character">&quot;</span>:
+                    <span class="ST1">c</span>.buscarCliente();
+                    <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">3</span><span class="character">&quot;</span>:
+                    <span class="ST1">m</span>.leerArchivoCliente();
+                    <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">4</span><span class="character">&quot;</span>:
+                    salir = <span class="keyword-directive">true</span>;
+                    <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">default</span>:
+                    System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Opcion invalida</span><span class="character">&quot;</span>);
+                    salir = <span class="keyword-directive">false</span>;
+            }
+        }<span class="keyword-directive">while</span>(!salir);
+    }
+    
+    <span class="keyword-directive">void</span> <span class="ST0">subMenu2</span>() <span class="keyword-directive">throws</span> IOException{<span class="comment">//Submenu de gestion de vuelos</span>
+        <span class="keyword-directive">boolean</span> salir = <span class="keyword-directive">false</span>;
+        <span class="keyword-directive">do</span>{
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">--------------------------------------</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">-    Registro y gestion de vuelos    -</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">--------------------------------------</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">1.-Crear Vuelo</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">2.-Buscar Vuelo</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">3.-Ver lista de Vuelos</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">4.-Ver Disponibilidad en Vuelo</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">5.-Regresar al menu anterior</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">--------------------------------------</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Opcion: </span><span class="character">&quot;</span>);
+            String op = <span class="ST1">br</span>.readLine();
+
+            <span class="keyword-directive">switch</span>(op){
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">1</span><span class="character">&quot;</span>:<span class="comment">//crear vuelo.</span>
+                    <span class="ST1">v</span>.crearVuelo();
+                    <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">2</span><span class="character">&quot;</span>:<span class="comment">//ver vuelos creados.</span>
+                    <span class="ST1">v</span>.verVuelos();
+                    <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">3</span><span class="character">&quot;</span>:
+                    <span class="ST1">m</span>.leerArchivoVuelo();
+                    <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">4</span><span class="character">&quot;</span>:
+                    System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Numero de Vuelo aconsultar: </span><span class="character">&quot;</span>);
+                    String nV = <span class="ST1">br</span>.readLine();
+                    <span class="ST1">v</span>.disponibilidad(nV);
+                    <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">5</span><span class="character">&quot;</span>:
+                    salir = <span class="keyword-directive">true</span>;
+                    <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">default</span>:
+                    System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Opcion invalida</span><span class="character">&quot;</span>);
+                    salir = <span class="keyword-directive">false</span>;
+            }
+        }<span class="keyword-directive">while</span>(!salir);
+    }
+    
+    <span class="keyword-directive">void</span> <span class="ST0">subMenu3</span>() <span class="keyword-directive">throws</span> IOException{
+        <span class="keyword-directive">boolean</span> salir = <span class="keyword-directive">false</span>;
+        <span class="keyword-directive">do</span>{
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">--------------------------------------</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">-   Gestion y venta de boletos       -</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">--------------------------------------</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">1.-Venta de Boletos</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">2.-Ver lista de Boletos</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">3.-Regresar al menu anterior</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">--------------------------------------</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Opcion: </span><span class="character">&quot;</span>);
+            String op = <span class="ST1">br</span>.readLine();
+
+            <span class="keyword-directive">switch</span>(op){
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">1</span><span class="character">&quot;</span>:
+                    <span class="ST1">b</span>.crearBoleto();
+                    <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">2</span><span class="character">&quot;</span>:
+                    <span class="ST1">b</span>.imprimirBoleto();
+                    <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">3</span><span class="character">&quot;</span>:
+                    salir = <span class="keyword-directive">true</span>;
+                    <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">default</span>:
+                    System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Opcion invalida</span><span class="character">&quot;</span>);
+                    salir = <span class="keyword-directive">false</span>;
+            }
+        }<span class="keyword-directive">while</span>(!salir);
+    }
+    
+    <span class="keyword-directive">void</span> <span class="ST0">subMenu4</span>() <span class="keyword-directive">throws</span> IOException{
+        <span class="keyword-directive">boolean</span> salir = <span class="keyword-directive">false</span>;
+        <span class="keyword-directive">do</span>{
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">--------------------------------------</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">-   Generacion de reportes           -</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">--------------------------------------</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">1.-Ventas totales.</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">2.-Vuelos vendidos.</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">3.-Regresar al menu anterior</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">--------------------------------------</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Opcion: </span><span class="character">&quot;</span>);
+            String op = <span class="ST1">br</span>.readLine();
+
+            <span class="keyword-directive">switch</span>(op){
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">1</span><span class="character">&quot;</span>:
+                    <span class="ST1">r</span>.imprimirTotal();
+                    <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">2</span><span class="character">&quot;</span>:
+                    <span class="ST1">r</span>.vueloVendidos();
+                    <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">3</span><span class="character">&quot;</span>:
+                    salir = <span class="keyword-directive">true</span>;
+                    <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">default</span>:
+                    System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Opcion invalida</span><span class="character">&quot;</span>);
+                    salir = <span class="keyword-directive">false</span>;
+            }
+        }<span class="keyword-directive">while</span>(!salir);
+    }
+}
+
+</pre>
+
+<table width="100%"><tr><td align="center">Manejador.java</td></tr></table>
+<pre>
+<span class="comment">/*Clase creada para la interaccion con los archivos de texto*/</span>
+<span class="keyword-directive">package</span> newairlineseller;
+
+<span class="keyword-directive">import</span> java.io.*;
+<span class="keyword-directive">import</span> java.util.regex.Matcher;
+<span class="keyword-directive">import</span> java.util.regex.Pattern;
+
+<span class="keyword-directive">public</span> <span class="keyword-directive">class</span> <span class="ST0">Manejador</span> {
+    PrintWriter <span class="ST1">pf</span>;
+    FileReader <span class="ST1">fr</span>;
+    BufferedReader <span class="ST1">br</span> = <span class="keyword-directive">new</span> BufferedReader(<span class="keyword-directive">new</span> InputStreamReader(System.<span class="ST2">in</span>));
+    
+    <span class="keyword-directive">void</span> <span class="ST0">crear</span>(String nArchivo){
+<span class="comment">/*crea el archivo vacio o verifica su existencia,</span>
+<span class="comment"> * necesario para almacenar los datos que generan los distintos metodos</span>
+<span class="comment"> * nArchivo es el parametro con el nombre que tendra el ficrero de texto</span>
+<span class="comment"> */</span>
+        <span class="keyword-directive">try</span>{
+            <span class="ST1">pf</span> = <span class="keyword-directive">new</span> PrintWriter(<span class="keyword-directive">new</span> FileWriter(nArchivo+<span class="character">&quot;</span><span class="character">.txt</span><span class="character">&quot;</span>,<span class="keyword-directive">true</span>));
+            <span class="ST1">pf</span>.close();
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Archivo </span><span class="character">&quot;</span>+nArchivo+<span class="character">&quot;</span><span class="character">.txt se genero o existe...</span><span class="character">&quot;</span>);
+        }<span class="keyword-directive">catch</span> (Exception e){
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Error en creacion de archivo.</span><span class="ST3">\n</span><span class="character">Error: </span><span class="character">&quot;</span>+e);
+        }
+    }
+    
+    <span class="keyword-directive">void</span> <span class="ST0">guardar</span>(String nArchivo, String nDatos){
+<span class="comment">/*crea o verifica la existencia del archivo para agregar los datos</span>
+<span class="comment"> * generados en los diferentes metodos que lo invocan</span>
+<span class="comment"> */</span>
+        <span class="keyword-directive">try</span>{
+            <span class="ST1">pf</span> = <span class="keyword-directive">new</span> PrintWriter(<span class="keyword-directive">new</span> FileWriter(nArchivo+<span class="character">&quot;</span><span class="character">.txt</span><span class="character">&quot;</span>,<span class="keyword-directive">true</span>));
+            <span class="ST1">pf</span>.println(nDatos);
+            <span class="ST1">pf</span>.close();
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Archivo </span><span class="character">&quot;</span>+nArchivo+<span class="character">&quot;</span><span class="character">.txt se genero o existe...</span><span class="character">&quot;</span>);
+        }<span class="keyword-directive">catch</span> (Exception e){
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Error de guardado en archivo.</span><span class="ST3">\n</span><span class="character">Error: </span><span class="character">&quot;</span>+e);
+        }
+    }
+    
+    String[] <span class="ST0">buscar</span>(String nArchivo, String ID){
+<span class="comment">/*busca por numero de cedula una linea especifica dentro de un archivo de texto</span>
+<span class="comment"> */</span>
+        String[] datos;
+        <span class="keyword-directive">try</span> {
+            <span class="ST1">fr</span> = <span class="keyword-directive">new</span> FileReader(nArchivo+<span class="character">&quot;</span><span class="character">.txt</span><span class="character">&quot;</span>);
+            BufferedReader brf = <span class="keyword-directive">new</span> BufferedReader(<span class="ST1">fr</span>);
+            String linea;
+            <span class="keyword-directive">while</span>((linea=brf.readLine())!=<span class="keyword-directive">null</span>){
+                datos = linea.split(<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>);
+                <span class="keyword-directive">if</span>(datos[0].equalsIgnoreCase(ID)){
+                    <span class="keyword-directive">return</span> datos;
+                }
+            }
+        } <span class="keyword-directive">catch</span> (Exception e) {
+        }
+        <span class="keyword-directive">return</span> datos = <span class="keyword-directive">null</span>;
+    }
+    
+    <span class="keyword-directive">double</span>[] <span class="ST0">buscarMontos</span>(<span class="keyword-directive">int</span> nVuelo) <span class="keyword-directive">throws</span> IOException{
+<span class="comment">/*busca los montos en un archivo de texto*/</span>
+        String[] datos;
+        <span class="keyword-directive">double</span>[] suma = {0,0,0,0,0,0,0,0};
+        <span class="comment">//suma contiene{0-monto total, 1-monto clase A, 2-monto clase B, 0-monto clase C,</span>
+    <span class="comment">//4-cantidad total de boletos, 5-cant boletos A, 6-cant boletos B, 7-cant boletos C}</span>
+        <span class="ST1">fr</span> = <span class="keyword-directive">new</span> FileReader(<span class="character">&quot;</span><span class="character">boletos</span><span class="character">&quot;</span>+nVuelo+<span class="character">&quot;</span><span class="character">.txt</span><span class="character">&quot;</span>);
+        BufferedReader brf = <span class="keyword-directive">new</span> BufferedReader(<span class="ST1">fr</span>);
+        String linea;
+
+        <span class="keyword-directive">while</span>((linea=brf.readLine())!=<span class="keyword-directive">null</span>){
+            datos = linea.split(<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>);
+            <span class="keyword-directive">if</span>(datos!=<span class="keyword-directive">null</span>){
+                suma[4]++;
+                <span class="keyword-directive">double</span> aux = Double.<span class="ST4">parseDouble</span>(datos[6]);
+                suma[0] += aux;
+                <span class="keyword-directive">if</span>(datos[5].equals(<span class="character">&quot;</span><span class="character">A</span><span class="character">&quot;</span>)){
+                    suma[1] += aux;
+                    suma[5]++;
+                }
+                <span class="keyword-directive">if</span>(datos[5].equals(<span class="character">&quot;</span><span class="character">B</span><span class="character">&quot;</span>)){
+                    suma[2] += aux;
+                    suma[6]++;
+                }
+                <span class="keyword-directive">if</span>(datos[5].equals(<span class="character">&quot;</span><span class="character">C</span><span class="character">&quot;</span>)){
+                    suma[3] += aux;
+                    suma[7]++;
+                }
+            }
+        }
+        <span class="ST1">fr</span>.close();
+        <span class="keyword-directive">return</span> suma;
+    }
+    
+    <span class="keyword-directive">int</span> <span class="ST0">buscar</span>(String nArchivo) <span class="keyword-directive">throws</span> IOException{
+<span class="comment">/*busca en un archivo el valor de la primera posicion en cada linea para</span>
+<span class="comment"> * saber el siguiente numero para el el vuelo*/</span>
+        <span class="keyword-directive">int</span> mayor = 0;
+        String[] datos;
+        <span class="ST1">fr</span> = <span class="keyword-directive">new</span> FileReader(nArchivo+<span class="character">&quot;</span><span class="character">.txt</span><span class="character">&quot;</span>);
+        BufferedReader brf = <span class="keyword-directive">new</span> BufferedReader(<span class="ST1">fr</span>);
+        String linea;
+        <span class="keyword-directive">while</span>((linea = brf.readLine())!=<span class="keyword-directive">null</span>){
+            datos = linea.split(<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>);
+            
+            <span class="keyword-directive">if</span> (datos.<span class="ST1">length</span>==1){
+                <span class="keyword-directive">return</span> 0;
+            }<span class="keyword-directive">else</span>{
+<span class="comment">//                for (int i = 0; i &lt; datos.length; i++) {</span>
+                    <span class="keyword-directive">int</span> indice = Integer.<span class="ST4">parseInt</span>(datos[0]);
+                    <span class="keyword-directive">if</span>(indice&gt;= mayor){
+                        mayor = indice;
+                    }<span class="keyword-directive">else</span>{
+                        <span class="keyword-directive">return</span> -1;
+                    }
+<span class="comment">//                }</span>
+            }
+        }
+        <span class="keyword-directive">return</span> mayor; <span class="comment">//retorna el valor del ultimo vuelo</span>
+    }
+    
+    <span class="keyword-directive">void</span> <span class="ST0">leerArchivoCliente</span>() <span class="keyword-directive">throws</span> IOException{
+<span class="comment">/*Imprime en pantalla una lista entendible con el contenido del archivo</span>
+<span class="comment"> * de clientes</span>
+<span class="comment"> */</span>
+        <span class="ST1">fr</span> = <span class="keyword-directive">new</span> FileReader(<span class="character">&quot;</span><span class="character">cliente.txt</span><span class="character">&quot;</span>);
+        BufferedReader brf = <span class="keyword-directive">new</span> BufferedReader(<span class="ST1">fr</span>);
+        String linea;
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Litado de clientes</span><span class="character">&quot;</span>);
+        <span class="keyword-directive">while</span>((linea=brf.readLine())!=<span class="keyword-directive">null</span>){
+            String[] datos = linea.split(<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[34m--------------------------------------</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[34mCedula:</span><span class="ST3">\t</span><span class="ST3">\t</span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+datos[0]);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[34mNombre:</span><span class="ST3">\t</span><span class="ST3">\t</span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+datos[2]+<span class="character">&quot;</span> <span class="character">&quot;</span>+datos[1]);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[34mTelefono:</span><span class="ST3">\t</span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+datos[3]);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[34mDireccion:</span><span class="ST3">\t</span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+datos[4]);
+        }
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[34m--------------------------------------</span><span class="character">&quot;</span>);
+
+    }
+    
+    <span class="keyword-directive">void</span> <span class="ST0">leerArchivoVuelo</span>() <span class="keyword-directive">throws</span> IOException{
+<span class="comment">/*Imprime en pantalla una lista entendible con el contenido del archivo</span>
+<span class="comment"> * de clientes</span>
+<span class="comment"> */</span>
+        <span class="ST1">fr</span> = <span class="keyword-directive">new</span> FileReader(<span class="character">&quot;</span><span class="character">vuelo.txt</span><span class="character">&quot;</span>);
+        BufferedReader brf = <span class="keyword-directive">new</span> BufferedReader(<span class="ST1">fr</span>);
+        String linea;
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[31mLitado de vuelos</span><span class="character">&quot;</span>);
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">|---------------------------------------------------------------|</span><span class="character">&quot;</span>);
+        <span class="keyword-directive">while</span>((linea=brf.readLine())!=<span class="keyword-directive">null</span>){
+            String[] datos = linea.split(<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">|Vuelo nº | Fecha      | Hora  | Origen | Destino | Tarifa</span><span class="ST3">\t</span><span class="character">|</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">|    </span><span class="character">&quot;</span>+datos[0]+<span class="character">&quot;</span><span class="ST3">\t</span><span class="character">  | </span><span class="character">&quot;</span>+datos[1]+<span class="character">&quot;</span><span class="character"> | </span><span class="character">&quot;</span>+datos[2]+<span class="character">&quot;</span><span class="character"> |   </span><span class="character">&quot;</span>+datos[3]+<span class="character">&quot;</span><span class="character">  |   </span><span class="character">&quot;</span>+datos[4]+<span class="character">&quot;</span><span class="character">   | </span><span class="character">&quot;</span>+datos[5]+<span class="character">&quot;</span><span class="ST3">\t</span><span class="character">|</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">|---------------------------------------------------------------|</span><span class="character">&quot;</span>);
+<span class="comment">//            System.out.println(  &quot;Nº de vuelo:\t&quot;+datos[0]);</span>
+<span class="comment">//            System.out.println( &quot;Fecha y hora:\t&quot;+datos[2]+&quot; &quot;+datos[1]);</span>
+<span class="comment">//            System.out.println(&quot;Ciudad Origen:\t&quot;+datos[3]</span>
+<span class="comment">//                           +&quot;\nCiudad Destino:\t&quot;+datos[4]);</span>
+<span class="comment">//            System.out.println(  &quot;Tarifa Base:\t&quot;+datos[5]);</span>
+<span class="comment">//            System.out.println(&quot;--------------------------------------&quot;);</span>
+<span class="comment">//            System.out.println();</span>
+        }
+    }
+    
+    <span class="keyword-directive">boolean</span> <span class="ST0">validarCedula</span>(String ci){
+        <span class="comment">//valida la cedula comparandola con un patron</span>
+        Pattern pat = Pattern.<span class="ST4">compile</span>(<span class="character">&quot;</span><span class="character">[0-9]{6,8}</span><span class="character">&quot;</span>);
+        Matcher mat = pat.matcher(ci);
+        <span class="keyword-directive">if</span>(mat.matches()){<span class="keyword-directive">return</span> <span class="keyword-directive">true</span>;}
+        <span class="keyword-directive">else</span>{<span class="keyword-directive">return</span> <span class="keyword-directive">false</span>;}
+    }
+    
+    <span class="keyword-directive">boolean</span> <span class="ST0">validarNombApe</span>(String nom){
+        <span class="comment">//valida el nombre y el apellido comparandolo con un patron</span>
+        <span class="keyword-directive">boolean</span> patF = Pattern.<span class="ST4">matches</span>(<span class="character">&quot;</span><span class="character">[a-zA-Z]{1,100}</span><span class="character">&quot;</span>,nom);
+        <span class="keyword-directive">return</span> patF;
+    }
+    
+    <span class="keyword-directive">boolean</span> <span class="ST0">validarTelf</span>(String telf){
+        <span class="comment">//valida el telefono comparandolo con un patron</span>
+        <span class="keyword-directive">boolean</span> patF = Pattern.<span class="ST4">matches</span>(<span class="character">&quot;</span><span class="character">[0-9]{11}</span><span class="character">&quot;</span>,telf);
+        <span class="keyword-directive">return</span> patF;
+    }
+    
+    <span class="keyword-directive">boolean</span> <span class="ST0">validarDir</span>(String dir){
+        <span class="comment">//valida la direccion comparandola con un patron</span>
+        <span class="keyword-directive">boolean</span> patF = Pattern.<span class="ST4">matches</span>(<span class="character">&quot;</span><span class="character">[a-zA-Z ]{1,200}</span><span class="character">&quot;</span>,dir);
+        <span class="keyword-directive">return</span> patF;
+    }
+    
+    <span class="keyword-directive">boolean</span> <span class="ST0">validarTarifa</span>(String t){
+        <span class="keyword-directive">boolean</span> patT = Pattern.<span class="ST4">matches</span>(<span class="character">&quot;</span><span class="ST3">\\</span><span class="character">d+</span><span class="ST3">\\</span><span class="character">.*</span><span class="ST3">\\</span><span class="character">d*</span><span class="character">&quot;</span>,t);
+        <span class="keyword-directive">return</span> patT;
+    }
+    
+    <span class="keyword-directive">boolean</span> <span class="ST0">validarFila</span>(String fil){
+        <span class="comment">//verifica que el numero de fila este entre 1 y 16</span>
+        <span class="keyword-directive">boolean</span> patT = Pattern.<span class="ST4">matches</span>(<span class="character">&quot;</span><span class="character">[1-16]</span><span class="character">&quot;</span>,fil);
+        <span class="keyword-directive">return</span> patT;
+    }
+    
+    <span class="keyword-directive">boolean</span> <span class="ST0">validarHora</span>(String vHora){
+        <span class="comment">//verifica que la hora ingresada tenga un formato valido.</span>
+        <span class="keyword-directive">boolean</span> patH = Pattern.<span class="ST4">matches</span>(<span class="character">&quot;</span><span class="character">[0-2]?</span><span class="ST3">\\</span><span class="character">d:[0-5]?</span><span class="ST3">\\</span><span class="character">d</span><span class="character">&quot;</span>,vHora);
+        <span class="keyword-directive">return</span> patH;
+    }
+    
+    <span class="keyword-directive">boolean</span> <span class="ST0">validarFecha</span>(String vFecha){
+        <span class="comment">//verifica que la fecha tenga un formato valido.</span>
+        <span class="keyword-directive">boolean</span> patF = Pattern.<span class="ST4">matches</span>(<span class="character">&quot;</span><span class="ST3">\\</span><span class="character">d+/</span><span class="ST3">\\</span><span class="character">d+/</span><span class="ST3">\\</span><span class="character">d{4}</span><span class="character">&quot;</span>,vFecha);
+        <span class="keyword-directive">return</span> patF;
+    }
+    
+    String <span class="ST0">selecCiudad</span>() <span class="keyword-directive">throws</span> IOException{
+        <span class="comment">/*muestra una lista de ciudades disponibles para los vuelos y devuelve</span>
+<span class="comment">         * el codigo para una de ella*/</span>
+        String ciudad = <span class="character">&quot;&quot;</span>;
+        <span class="keyword-directive">boolean</span> val=<span class="keyword-directive">false</span>;
+        <span class="keyword-directive">do</span> {
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">1 - Caracas.</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">2 - Barquisimeto.</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">3 - Valencia.</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">4 - Barcelona.</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">5 - Maracaibo.</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">6 - Porlamar</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Seleccione Ciudad: </span><span class="character">&quot;</span>);
+
+            String aux3 = <span class="ST1">br</span>.readLine();
+            <span class="keyword-directive">if</span>(Pattern.<span class="ST4">matches</span>(<span class="character">&quot;</span><span class="character">[1-6]</span><span class="character">&quot;</span>, aux3)){
+                <span class="keyword-directive">switch</span>(aux3){
+                    <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">1</span><span class="character">&quot;</span> : ciudad = <span class="character">&quot;</span><span class="character">CCS</span><span class="character">&quot;</span>; val=<span class="keyword-directive">true</span>; <span class="keyword-directive">break</span>;
+                    <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">2</span><span class="character">&quot;</span> : ciudad = <span class="character">&quot;</span><span class="character">BRM</span><span class="character">&quot;</span>; val=<span class="keyword-directive">true</span>; <span class="keyword-directive">break</span>;
+                    <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">3</span><span class="character">&quot;</span> : ciudad = <span class="character">&quot;</span><span class="character">VLN</span><span class="character">&quot;</span>; val=<span class="keyword-directive">true</span>; <span class="keyword-directive">break</span>;
+                    <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">4</span><span class="character">&quot;</span> : ciudad = <span class="character">&quot;</span><span class="character">BLA</span><span class="character">&quot;</span>; val=<span class="keyword-directive">true</span>; <span class="keyword-directive">break</span>;
+                    <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">5</span><span class="character">&quot;</span> : ciudad = <span class="character">&quot;</span><span class="character">MAR</span><span class="character">&quot;</span>; val=<span class="keyword-directive">true</span>; <span class="keyword-directive">break</span>;
+                    <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">6</span><span class="character">&quot;</span> : ciudad = <span class="character">&quot;</span><span class="character">POR</span><span class="character">&quot;</span>; val=<span class="keyword-directive">true</span>; <span class="keyword-directive">break</span>;
+                }
+            }<span class="keyword-directive">else</span>{
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Seleccion invalida.</span><span class="character">&quot;</span>);
+                val=<span class="keyword-directive">false</span>;
+            }
+        } <span class="keyword-directive">while</span> (!val);
+        <span class="keyword-directive">return</span> ciudad;
+    }
+    
+    <span class="keyword-directive">boolean</span> <span class="ST0">verDispon</span>(<span class="keyword-directive">int</span> fil, <span class="keyword-directive">int</span> col, String numVuelo){
+<span class="comment">//        verifica la disponibilidad de un asiento en un vuelo especifico</span>
+        String[] datos;
+        <span class="keyword-directive">try</span> {
+            <span class="ST1">fr</span> = <span class="keyword-directive">new</span> FileReader(<span class="character">&quot;</span><span class="character">boletos</span><span class="character">&quot;</span>+numVuelo+<span class="character">&quot;</span><span class="character">.txt</span><span class="character">&quot;</span>);
+            BufferedReader brf = <span class="keyword-directive">new</span> BufferedReader(<span class="ST1">fr</span>);
+            String linea;
+            <span class="keyword-directive">while</span>((linea=brf.readLine())!=<span class="keyword-directive">null</span>){
+                datos = linea.split(<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>);
+                <span class="keyword-directive">if</span>((datos[3].equals(fil+<span class="character">&quot;&quot;</span>))&amp;&amp;(datos[4].equals(col+<span class="character">&quot;&quot;</span>))){
+                    <span class="keyword-directive">return</span> <span class="keyword-directive">false</span>;
+                }
+            }
+        } <span class="keyword-directive">catch</span> (Exception e) {
+            System.<span class="ST2">err</span>.println(e);
+        }
+        <span class="keyword-directive">return</span> <span class="keyword-directive">true</span>;
+    }
+    
+}
+
+</pre>
+
+<table width="100%"><tr><td align="center">Cliente.java</td></tr></table>
+<pre>
+<span class="comment">/*Creacion y gestion del registro de clientes*/</span>
+<span class="keyword-directive">package</span> newairlineseller;
+
+<span class="keyword-directive">import</span> java.io.*;
+<span class="keyword-directive">import</span> java.util.logging.Level;
+<span class="keyword-directive">import</span> java.util.logging.Logger;
+
+<span class="keyword-directive">public</span> <span class="keyword-directive">class</span> <span class="ST0">Cliente</span> {
+    <span class="keyword-directive">boolean</span> <span class="ST1">si</span>, <span class="ST1">si1</span>;
+    String <span class="ST1">nom</span>, <span class="ST1">ape</span>, <span class="ST1">ci</span>, <span class="ST1">dir</span>, <span class="ST1">telf</span>, <span class="ST1">aux</span>;
+    Manejador <span class="ST1">man</span> = <span class="keyword-directive">new</span> Manejador();
+    BufferedReader <span class="ST1">br</span> = <span class="keyword-directive">new</span> BufferedReader(<span class="keyword-directive">new</span> InputStreamReader(System.<span class="ST2">in</span>));
+    
+    <span class="keyword-directive">void</span> <span class="ST0">crearCliente</span>(){
+<span class="comment">/*crea un archivo con la informacion de los clientes que compran un voleto</span>
+<span class="comment"> * se emplean ciclos reperitivos para verificar que los datos ingresados</span>
+<span class="comment"> * son correctos o tiene un formato compatible con el sistema*/</span>
+        <span class="keyword-directive">try</span> {
+            <span class="ST1">man</span>.crear(<span class="character">&quot;</span><span class="character">cliente</span><span class="character">&quot;</span>);
+            <span class="keyword-directive">do</span>{
+                System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Cedula: </span><span class="ST3">\t</span><span class="character">&quot;</span>);
+                <span class="ST1">aux</span> = <span class="ST1">br</span>.readLine();
+                <span class="keyword-directive">if</span>(<span class="ST1">man</span>.validarCedula(<span class="ST1">aux</span>)){
+                    <span class="ST1">ci</span> = <span class="ST1">aux</span>;
+                    String[] ver = <span class="ST1">man</span>.buscar(<span class="character">&quot;</span><span class="character">cliente</span><span class="character">&quot;</span>, <span class="ST1">ci</span>);
+                    
+                    <span class="keyword-directive">if</span> (ver==<span class="keyword-directive">null</span>){
+                        pedirDatos();
+                        String data = <span class="ST1">ci</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">nom</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">ape</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">telf</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">dir</span>;
+                        <span class="ST1">man</span>.guardar(<span class="character">&quot;</span><span class="character">cliente</span><span class="character">&quot;</span>, data);
+                        <span class="ST1">si</span> = <span class="keyword-directive">true</span>;
+                    }<span class="keyword-directive">else</span>{
+                        <span class="keyword-directive">if</span>(ver[0].equals(<span class="ST1">ci</span>)){
+                            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30mNombre:</span><span class="ST3">\t</span><span class="ST3">\t</span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+ver[1]);
+                            <span class="ST1">nom</span> = ver[1];
+                            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30mApellido:</span><span class="ST3">\t</span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+ver[2]);
+                            <span class="ST1">ape</span> = ver[2];
+                            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30mTelefono:</span><span class="ST3">\t</span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+ver[3]);
+                            <span class="ST1">telf</span> = ver[3];
+                            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30mDireccion:</span><span class="ST3">\t</span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+ver[4]);
+                            <span class="ST1">dir</span> = ver[4];
+                            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[31mCliente encontrado!!!</span><span class="ST3">\033</span><span class="character">[30m</span><span class="character">&quot;</span>);
+                            <span class="ST1">si</span> = <span class="keyword-directive">true</span>;
+                        }<span class="keyword-directive">else</span>{
+                            pedirDatos();
+                            String data = <span class="ST1">ci</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">nom</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">ape</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">telf</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">dir</span>;
+                            <span class="ST1">man</span>.guardar(<span class="character">&quot;</span><span class="character">cliente</span><span class="character">&quot;</span>, data);
+                            <span class="ST1">si</span> = <span class="keyword-directive">true</span>;
+                        }
+                    }
+                }<span class="keyword-directive">else</span>{
+                    System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Cedula invalida..</span><span class="character">&quot;</span>);
+                    <span class="ST1">si</span> = <span class="keyword-directive">false</span>;
+                }
+            }<span class="keyword-directive">while</span>(!<span class="ST1">si</span>);
+        } <span class="keyword-directive">catch</span> (IOException ex) {
+            Logger.<span class="ST4">getLogger</span>(Cliente.<span class="keyword-directive">class</span>.getName()).log(Level.<span class="ST2">SEVERE</span>, <span class="keyword-directive">null</span>, ex);
+        }
+    }
+    
+    <span class="keyword-directive">void</span> <span class="ST0">pedirDatos</span>() <span class="keyword-directive">throws</span> IOException{
+<span class="comment">//        pide los datos basicos de informacion para el archivo cliente.txt</span>
+        <span class="keyword-directive">do</span>{
+            System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Nombre:</span><span class="ST3">\t</span><span class="ST3">\t</span><span class="character">&quot;</span>);
+            <span class="ST1">aux</span> = <span class="ST1">br</span>.readLine();
+            <span class="keyword-directive">if</span>(<span class="ST1">man</span>.validarNombApe(<span class="ST1">aux</span>)){
+                <span class="ST1">nom</span> = <span class="ST1">aux</span>;
+                <span class="ST1">si1</span> = <span class="keyword-directive">true</span>;
+            }<span class="keyword-directive">else</span>{
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Nombre invalido!!!</span><span class="character">&quot;</span>);
+                <span class="ST1">si1</span> = <span class="keyword-directive">false</span>;
+            }
+        }<span class="keyword-directive">while</span>(!<span class="ST1">si1</span>);
+        <span class="keyword-directive">do</span>{
+            System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Apelido:</span><span class="ST3">\t</span><span class="character">&quot;</span>);
+            <span class="ST1">aux</span> = <span class="ST1">br</span>.readLine();
+            <span class="keyword-directive">if</span>(<span class="ST1">man</span>.validarNombApe(<span class="ST1">aux</span>)){
+                <span class="ST1">ape</span> = <span class="ST1">aux</span>;
+                <span class="ST1">si1</span> = <span class="keyword-directive">true</span>;
+            }<span class="keyword-directive">else</span>{
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Apellido invalido!!!</span><span class="character">&quot;</span>);
+                <span class="ST1">si1</span> = <span class="keyword-directive">false</span>;
+            }
+        }<span class="keyword-directive">while</span>(!<span class="ST1">si1</span>);
+        <span class="keyword-directive">do</span>{
+            System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Telefono:</span><span class="ST3">\t</span><span class="character">&quot;</span>);
+            <span class="ST1">aux</span> = <span class="ST1">br</span>.readLine();
+            <span class="keyword-directive">if</span>(<span class="ST1">man</span>.validarTelf(<span class="ST1">aux</span>)){
+                <span class="ST1">telf</span> = <span class="ST1">aux</span>;
+                <span class="ST1">si1</span> = <span class="keyword-directive">true</span>;
+            }<span class="keyword-directive">else</span>{
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Telefono invalido!!!</span><span class="character">&quot;</span>);
+                <span class="ST1">si1</span> = <span class="keyword-directive">false</span>;
+            }
+        }<span class="keyword-directive">while</span>(!<span class="ST1">si1</span>);
+        <span class="keyword-directive">do</span>{
+            System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Diereccion:</span><span class="ST3">\t</span><span class="character">&quot;</span>);
+            <span class="ST1">aux</span> = <span class="ST1">br</span>.readLine();
+            <span class="keyword-directive">if</span>(<span class="ST1">man</span>.validarDir(<span class="ST1">aux</span>)){
+                <span class="ST1">dir</span> = <span class="ST1">aux</span>;
+                <span class="ST1">si1</span> = <span class="keyword-directive">true</span>;
+            }<span class="keyword-directive">else</span>{
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Direccion invalido!!!</span><span class="character">&quot;</span>);
+                <span class="ST1">si1</span> = <span class="keyword-directive">false</span>;
+            }
+        }<span class="keyword-directive">while</span>(!<span class="ST1">si1</span>);
+    }
+    
+    String[] <span class="ST0">pedirDatos2</span>() <span class="keyword-directive">throws</span> IOException{
+<span class="comment">/*solicita los datos de un cliente y devuelve un arreglo para utilizar</span>
+<span class="comment"> * los datos en otra clase*/</span>
+        String[] datos = <span class="keyword-directive">new</span> String[4];
+        <span class="keyword-directive">do</span>{
+            System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Nombre:</span><span class="ST3">\t</span><span class="ST3">\t</span><span class="character">&quot;</span>);
+            <span class="ST1">aux</span> = <span class="ST1">br</span>.readLine();
+            <span class="keyword-directive">if</span>(<span class="ST1">man</span>.validarNombApe(<span class="ST1">aux</span>)){
+                datos[0] = <span class="ST1">aux</span>;
+                <span class="ST1">si1</span> = <span class="keyword-directive">true</span>;
+            }<span class="keyword-directive">else</span>{
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Nombre invalido!!!</span><span class="character">&quot;</span>);
+                <span class="ST1">si1</span> = <span class="keyword-directive">false</span>;
+            }
+        }<span class="keyword-directive">while</span>(!<span class="ST1">si1</span>);
+        <span class="keyword-directive">do</span>{
+            System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Apelido:</span><span class="ST3">\t</span><span class="character">&quot;</span>);
+            <span class="ST1">aux</span> = <span class="ST1">br</span>.readLine();
+            <span class="keyword-directive">if</span>(<span class="ST1">man</span>.validarNombApe(<span class="ST1">aux</span>)){
+                datos[1] = <span class="ST1">aux</span>;
+                <span class="ST1">si1</span> = <span class="keyword-directive">true</span>;
+            }<span class="keyword-directive">else</span>{
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Apellido invalido!!!</span><span class="character">&quot;</span>);
+                <span class="ST1">si1</span> = <span class="keyword-directive">false</span>;
+            }
+        }<span class="keyword-directive">while</span>(!<span class="ST1">si1</span>);
+        <span class="keyword-directive">do</span>{
+            System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Telefono:</span><span class="ST3">\t</span><span class="character">&quot;</span>);
+            <span class="ST1">aux</span> = <span class="ST1">br</span>.readLine();
+            <span class="keyword-directive">if</span>(<span class="ST1">man</span>.validarTelf(<span class="ST1">aux</span>)){
+                datos[2] = <span class="ST1">aux</span>;
+                <span class="ST1">si1</span> = <span class="keyword-directive">true</span>;
+            }<span class="keyword-directive">else</span>{
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Telefono invalido!!!</span><span class="character">&quot;</span>);
+                <span class="ST1">si1</span> = <span class="keyword-directive">false</span>;
+            }
+        }<span class="keyword-directive">while</span>(!<span class="ST1">si1</span>);
+        <span class="keyword-directive">do</span>{
+            System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Diereccion:</span><span class="ST3">\t</span><span class="character">&quot;</span>);
+            <span class="ST1">aux</span> = <span class="ST1">br</span>.readLine();
+            <span class="keyword-directive">if</span>(<span class="ST1">man</span>.validarDir(<span class="ST1">aux</span>)){
+                datos[3] = <span class="ST1">aux</span>;
+                <span class="ST1">si1</span> = <span class="keyword-directive">true</span>;
+            }<span class="keyword-directive">else</span>{
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Direccion invalido!!!</span><span class="character">&quot;</span>);
+                <span class="ST1">si1</span> = <span class="keyword-directive">false</span>;
+            }
+        }<span class="keyword-directive">while</span>(!<span class="ST1">si1</span>);
+        <span class="keyword-directive">return</span> datos;
+    }
+    
+    <span class="keyword-directive">void</span> <span class="ST0">buscarCliente</span>() <span class="keyword-directive">throws</span> IOException{
+<span class="comment">//        imprime por pantalla los datos de un cliente registrado en el archivo</span>
+        <span class="keyword-directive">do</span>{
+            System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Introduzca cedula a buscar: </span><span class="character">&quot;</span>);
+            <span class="ST1">aux</span> = <span class="ST1">br</span>.readLine();
+            <span class="keyword-directive">if</span>(<span class="ST1">man</span>.validarCedula(<span class="ST1">aux</span>)){
+                <span class="ST1">ci</span> = <span class="ST1">aux</span>;
+                String[] ver = <span class="ST1">man</span>.buscar(<span class="character">&quot;</span><span class="character">cliente</span><span class="character">&quot;</span>, <span class="ST1">ci</span>);
+                
+                <span class="keyword-directive">if</span> (ver==<span class="keyword-directive">null</span>){
+                    System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[31mCliente no encontrado...</span><span class="ST3">\033</span><span class="character">[30m</span><span class="character">&quot;</span>);
+                    <span class="ST1">si</span> = <span class="keyword-directive">true</span>;
+                }<span class="keyword-directive">else</span>{
+                    <span class="keyword-directive">if</span>(ver[0].equals(<span class="ST1">ci</span>)){
+                        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[31m--------------------------------------</span><span class="character">&quot;</span>);
+                        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30mNombre:</span><span class="ST3">\t</span><span class="ST3">\t</span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+ver[1]);
+                        <span class="ST1">nom</span> = ver[1];
+                        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30mApellido:</span><span class="ST3">\t</span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+ver[2]);
+                        <span class="ST1">ape</span> = ver[2];
+                        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30mTelefono:</span><span class="ST3">\t</span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+ver[3]);
+                        <span class="ST1">telf</span> = ver[3];
+                        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30mDireccion:</span><span class="ST3">\t</span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+ver[4]);
+                        <span class="ST1">dir</span> = ver[4];
+                        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[31mCliente encontrado!!!</span><span class="ST3">\033</span><span class="character">[30m</span><span class="character">&quot;</span>);
+                        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[31m--------------------------------------</span><span class="character">&quot;</span>);
+                        <span class="ST1">si</span> = <span class="keyword-directive">true</span>;
+                    }<span class="keyword-directive">else</span>{
+                        pedirDatos();
+                        String data = <span class="ST1">ci</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">nom</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">ape</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">telf</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">dir</span>;
+                        <span class="ST1">man</span>.guardar(<span class="character">&quot;</span><span class="character">cliente</span><span class="character">&quot;</span>, data);
+                        <span class="ST1">si</span> = <span class="keyword-directive">true</span>;
+                    }
+                }
+            }<span class="keyword-directive">else</span>{
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Cedula invalida..</span><span class="character">&quot;</span>);
+                <span class="ST1">si</span> = <span class="keyword-directive">false</span>;
+            }
+        }<span class="keyword-directive">while</span>(!<span class="ST1">si</span>);
+    }
+}
+
+</pre>
+
+<table width="100%"><tr><td align="center">Vuelos.java</td></tr></table>
+<pre>
+<span class="comment">/*Creacion y gestion vuelos*/</span>
+<span class="keyword-directive">package</span> newairlineseller;
+
+<span class="keyword-directive">import</span> java.io.BufferedReader;
+<span class="keyword-directive">import</span> java.io.IOException;
+<span class="keyword-directive">import</span> java.io.InputStreamReader;
+
+<span class="keyword-directive">public</span> <span class="keyword-directive">class</span> <span class="ST0">Vuelos</span> {
+    String <span class="ST1">fechaVuelo</span>, <span class="ST1">horaVuelo</span>, <span class="ST1">ciudadOrigen</span>, <span class="ST1">ciudadDestino</span>, <span class="ST1">aux</span>, <span class="ST1">color</span>;
+    <span class="keyword-directive">double</span> <span class="ST1">tarifaBase</span>;
+    <span class="keyword-directive">boolean</span> <span class="ST1">si</span>, <span class="ST1">dispon</span>;
+    <span class="keyword-directive">int</span> <span class="ST1">cantNaves</span> = 10, <span class="ST1">disp</span> = 96;
+    Manejador <span class="ST1">man</span> = <span class="keyword-directive">new</span> Manejador();
+    BufferedReader <span class="ST1">br</span> = <span class="keyword-directive">new</span> BufferedReader(<span class="keyword-directive">new</span> InputStreamReader(System.<span class="ST2">in</span>));
+    
+    <span class="keyword-directive">void</span> <span class="ST0">crearVuelo</span>() <span class="keyword-directive">throws</span> IOException{<span class="comment">//Crear vuelo</span>
+        <span class="ST1">man</span>.crear(<span class="character">&quot;</span><span class="character">vuelo</span><span class="character">&quot;</span>);<span class="comment">//Crear archivo vuelo.txt</span>
+        <span class="keyword-directive">int</span> num = <span class="ST1">man</span>.buscar(<span class="character">&quot;</span><span class="character">vuelo</span><span class="character">&quot;</span>)+1;<span class="comment">//busca en el numero del ultimo vuelo creado y le suma 1 para crear el siguiente vuelo.</span>
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30mVuelo #</span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+num+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30m.</span><span class="character">&quot;</span>);<span class="comment">//Imprime en pantalla el numero de vuelo</span>
+        <span class="keyword-directive">do</span>{<span class="comment">//bucle para verificacion de datos ingresados para la cracion del vuelo</span>
+            System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Fecha del Vuelo: </span><span class="character">&quot;</span>);
+            <span class="ST1">aux</span> = <span class="ST1">br</span>.readLine();
+            <span class="keyword-directive">if</span>(<span class="ST1">man</span>.validarFecha(<span class="ST1">aux</span>)){<span class="comment">//evalua mediante una funcion si el dato fue ingrado en el formato correcto.</span>
+                <span class="ST1">fechaVuelo</span> = <span class="ST1">aux</span>;
+                <span class="ST1">si</span> = <span class="keyword-directive">true</span>;
+                <span class="comment">//Si el dato es correcto se carga el valor de la variable auxiliar en la variable definitiva.</span>
+                <span class="comment">//la variable &quot;si&quot; se evalua a verdadero.</span>
+            }<span class="keyword-directive">else</span>{
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Fecha invalida.</span><span class="character">&quot;</span>);
+                <span class="ST1">si</span> = <span class="keyword-directive">false</span>;
+                <span class="comment">//si el dato no tiene un formato valido, le indica al usuario que el dato no paso la verificacion</span>
+                <span class="comment">//evalua la variable &quot;si&quot; a falso para que el bucle se repita y permita ingresarl el dato nuevamente.</span>
+            }
+        }<span class="keyword-directive">while</span>(!<span class="ST1">si</span>);<span class="comment">//El bucle se reperita mientras la variable &quot;si&quot; se evalue falsa.</span>
+        <span class="keyword-directive">do</span>{<span class="comment">//bucle de virificacion del formato de la hora.</span>
+            System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Hora de salida: </span><span class="character">&quot;</span>);
+            <span class="ST1">aux</span> = <span class="ST1">br</span>.readLine();
+            <span class="keyword-directive">if</span>(<span class="ST1">man</span>.validarHora(<span class="ST1">aux</span>)){
+                <span class="ST1">horaVuelo</span> = <span class="ST1">aux</span>;
+                <span class="ST1">si</span> = <span class="keyword-directive">true</span>;
+            }<span class="keyword-directive">else</span>{
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Hora invalida.</span><span class="character">&quot;</span>);
+                <span class="ST1">si</span> = <span class="keyword-directive">false</span>;
+            }
+        }<span class="keyword-directive">while</span>(!<span class="ST1">si</span>);
+
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Ciudad de origen: </span><span class="character">&quot;</span>);
+        <span class="ST1">ciudadOrigen</span> = <span class="ST1">man</span>.selecCiudad();<span class="comment">//mediante la fucion selecCiudad carga un codigo de ciudad en la variable correspondiente</span>
+        
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Ciudad destino: </span><span class="character">&quot;</span>);
+        <span class="ST1">ciudadDestino</span> = <span class="ST1">man</span>.selecCiudad();
+        
+        <span class="keyword-directive">do</span>{
+            System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Tarifa base: </span><span class="character">&quot;</span>);
+            <span class="ST1">aux</span> = <span class="ST1">br</span>.readLine();
+            <span class="keyword-directive">if</span>(<span class="ST1">man</span>.validarTarifa(<span class="ST1">aux</span>)){
+                <span class="ST1">tarifaBase</span> = Double.<span class="ST4">parseDouble</span>(<span class="ST1">aux</span>);
+                <span class="ST1">si</span> = <span class="keyword-directive">true</span>;
+            }<span class="keyword-directive">else</span>{
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Fecha invalida.</span><span class="character">&quot;</span>);
+                <span class="ST1">si</span> = <span class="keyword-directive">false</span>;
+            }
+        }<span class="keyword-directive">while</span>(!<span class="ST1">si</span>);
+        String data = num+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">fechaVuelo</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">horaVuelo</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">ciudadOrigen</span>
+                +<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">ciudadDestino</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">tarifaBase</span>;
+        <span class="ST1">man</span>.guardar(<span class="character">&quot;</span><span class="character">vuelo</span><span class="character">&quot;</span>, data);
+    }
+    
+    <span class="keyword-directive">void</span> <span class="ST0">verVuelos</span>() <span class="keyword-directive">throws</span> IOException{<span class="comment">//muestra los vuelos creados</span>
+        System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Introduzca el numero del vuelos: </span><span class="character">&quot;</span>);
+        <span class="ST1">aux</span> = <span class="ST1">br</span>.readLine();
+        String[] datos = <span class="ST1">man</span>.buscar(<span class="character">&quot;</span><span class="character">vuelo</span><span class="character">&quot;</span>, <span class="ST1">aux</span>);
+        <span class="comment">//si la funcion buscar() devuelve un null significa que el archivo esta vacio</span>
+        <span class="keyword-directive">if</span>(datos!=<span class="keyword-directive">null</span>){
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[34m|------------------------------------|</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[34m|Vuelo #</span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+datos[0]+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[34m</span><span class="ST3">\t</span><span class="ST3">\t</span><span class="ST3">\t</span><span class="character">     |</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[34m|Con fecha: </span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+datos[1]+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[34m - a las </span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+datos[2]+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[34m |</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[34m|De </span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+datos[3]+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[34m a </span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+datos[4]+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[34m</span><span class="ST3">\t</span><span class="ST3">\t</span><span class="ST3">\t</span><span class="character">     |</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[34m|Con una tatira base de </span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+datos[5]+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[34m</span><span class="ST3">\t</span><span class="character">     |</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[34m|------------------------------------|</span><span class="character">&quot;</span>);
+
+        }<span class="keyword-directive">else</span>{
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Vuelo no encontrado...!</span><span class="character">&quot;</span>);
+        }
+        
+    }
+
+    <span class="keyword-directive">boolean</span> <span class="ST0">verificarVuelo</span>(String n){<span class="comment">//verifica la existencia de un vuelo en le archivo vuelo.txt</span>
+        String[] data = <span class="ST1">man</span>.buscar(<span class="character">&quot;</span><span class="character">vuelo</span><span class="character">&quot;</span>, n);
+        <span class="keyword-directive">if</span>(data!=<span class="keyword-directive">null</span>){
+            <span class="keyword-directive">if</span>(data[0].equals(n)){
+                <span class="keyword-directive">return</span> <span class="keyword-directive">true</span>;
+            }<span class="keyword-directive">else</span>{
+                <span class="keyword-directive">return</span> <span class="keyword-directive">false</span>;
+            }
+        }<span class="keyword-directive">else</span>{
+            <span class="keyword-directive">return</span> <span class="keyword-directive">false</span>;
+        }
+    }
+    
+    String[]<span class="ST0">infoVuelo</span>(String n){<span class="comment">//envia un arreglo con la informacion de un buelo buscado</span>
+        String[] data;
+        data = <span class="ST1">man</span>.buscar(<span class="character">&quot;</span><span class="character">vuelo</span><span class="character">&quot;</span>,n);
+        <span class="keyword-directive">return</span> data;
+    }
+    
+    <span class="keyword-directive">void</span> <span class="ST0">disponibilidad</span>(String numV){
+<span class="comment">/*imprime en pantalla una matriz con la disposicion de los diferentes asientos</span>
+<span class="comment"> * en un vuelo. Se incican en color negro los asientos disponibles, y en</span>
+<span class="comment"> * color rojo los asientos ocupados*/</span>
+        <span class="keyword-directive">int</span> i,j,x;
+        
+        <span class="keyword-directive">for</span>(x=1; x&lt;=16; x++){
+            <span class="keyword-directive">if</span>(x&lt;=9){
+                System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[32m |</span><span class="character">&quot;</span>+x+<span class="character">&quot;</span><span class="character">| </span><span class="character">&quot;</span>);
+            }<span class="keyword-directive">else</span>{
+                System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[32m|</span><span class="character">&quot;</span>+x+<span class="character">&quot;</span><span class="character">| </span><span class="character">&quot;</span>);
+            }
+        }
+
+        System.<span class="ST2">out</span>.println();
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[32m-------------------------------------------------------------------------------</span><span class="character">&quot;</span>);
+        <span class="keyword-directive">for</span> (i=0;i&lt;=5;i++){
+            <span class="keyword-directive">if</span>(i==3){
+                System.<span class="ST2">out</span>.println();
+            }
+            <span class="keyword-directive">for</span> (j=0;j&lt;=15;j++){
+                <span class="comment">//funcion de ver disponibilidad</span>
+                <span class="keyword-directive">if</span>(<span class="ST1">man</span>.verDispon(j, i, numV)){
+                    <span class="ST1">dispon</span> = <span class="keyword-directive">false</span>;
+                }<span class="keyword-directive">else</span>{
+                    <span class="ST1">dispon</span> = <span class="keyword-directive">true</span>;
+                }
+                <span class="keyword-directive">if</span>(<span class="ST1">dispon</span>){
+                    <span class="ST1">disp</span>--;
+                    <span class="ST1">color</span> = <span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>;
+                }<span class="keyword-directive">else</span>{
+                    <span class="ST1">color</span> = <span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30m</span><span class="character">&quot;</span>;
+                }
+                <span class="keyword-directive">switch</span>(i){
+                    <span class="keyword-directive">case</span> 0 : System.<span class="ST2">out</span>.print(<span class="ST1">color</span>+<span class="character">&quot;</span><span class="character"> |A| </span><span class="character">&quot;</span>); <span class="keyword-directive">break</span>;
+                    <span class="keyword-directive">case</span> 1 : System.<span class="ST2">out</span>.print(<span class="ST1">color</span>+<span class="character">&quot;</span><span class="character"> |B| </span><span class="character">&quot;</span>); <span class="keyword-directive">break</span>;
+                    <span class="keyword-directive">case</span> 2 : System.<span class="ST2">out</span>.print(<span class="ST1">color</span>+<span class="character">&quot;</span><span class="character"> |C| </span><span class="character">&quot;</span>); <span class="keyword-directive">break</span>;
+                    <span class="keyword-directive">case</span> 3 : System.<span class="ST2">out</span>.print(<span class="ST1">color</span>+<span class="character">&quot;</span><span class="character"> |D| </span><span class="character">&quot;</span>); <span class="keyword-directive">break</span>;
+                    <span class="keyword-directive">case</span> 4 : System.<span class="ST2">out</span>.print(<span class="ST1">color</span>+<span class="character">&quot;</span><span class="character"> |E| </span><span class="character">&quot;</span>); <span class="keyword-directive">break</span>;
+                    <span class="keyword-directive">case</span> 5 : System.<span class="ST2">out</span>.print(<span class="ST1">color</span>+<span class="character">&quot;</span><span class="character"> |F| </span><span class="character">&quot;</span>); <span class="keyword-directive">break</span>;
+                }
+            }
+            System.<span class="ST2">out</span>.println();
+        }
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[32m-------------------------------------------------------------------------------</span><span class="character">&quot;</span>);
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Lugares disponibles: </span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+<span class="ST1">disp</span>);
+        <span class="ST1">disp</span> = 96;
+    }
+    
+}
+</pre>
+
+<table width="100%"><tr><td align="center">Boleto.java</td></tr></table>
+<pre>
+<span class="comment">/*Gestion y venta de boletos*/</span>
+<span class="keyword-directive">package</span> newairlineseller;
+
+<span class="keyword-directive">import</span> java.io.BufferedReader;
+<span class="keyword-directive">import</span> java.io.File;
+<span class="keyword-directive">import</span> java.io.IOException;
+<span class="keyword-directive">import</span> java.io.InputStreamReader;
+
+
+<span class="keyword-directive">public</span> <span class="keyword-directive">class</span> <span class="ST0">Boleto</span> {
+    String <span class="ST1">nom</span>, <span class="ST1">ape</span>, <span class="ST1">ci</span>, <span class="ST1">dir</span>, <span class="ST1">telf</span>, <span class="ST1">nVuel</span>, <span class="ST1">fVuelo</span>, <span class="ST1">hVuelo</span>, <span class="ST1">nBoleto</span>, 
+             <span class="ST1">clase</span>, <span class="ST1">ciudadOrigen</span>, <span class="ST1">ciudadDestino</span>, <span class="ST1">aux</span>, <span class="ST1">asiento</span>;
+    <span class="keyword-directive">boolean</span> <span class="ST1">si</span>;
+    <span class="keyword-directive">double</span> <span class="ST1">tarifa</span>, <span class="ST1">base</span>;
+    <span class="keyword-directive">int</span> <span class="ST1">fil</span>, <span class="ST1">col</span>;
+    Manejador <span class="ST1">man</span> = <span class="keyword-directive">new</span> Manejador();
+    Vuelos <span class="ST1">v</span> = <span class="keyword-directive">new</span> Vuelos();
+    Cliente <span class="ST1">c</span> = <span class="keyword-directive">new</span> Cliente();
+    BufferedReader <span class="ST1">br</span> = <span class="keyword-directive">new</span> BufferedReader(<span class="keyword-directive">new</span> InputStreamReader(System.<span class="ST2">in</span>));
+    
+    <span class="keyword-directive">double</span> <span class="ST0">tarifaBase</span>(String nV){
+<span class="comment">//busca en el archivo vuelo la tarifa base correspondiente a un vuelo especifico</span>
+        <span class="keyword-directive">double</span> b;
+        String[] vl = <span class="ST1">man</span>.buscar(<span class="character">&quot;</span><span class="character">vuelo</span><span class="character">&quot;</span>, nV);
+        b = Double.<span class="ST3">parseDouble</span>(vl[5]);
+        <span class="keyword-directive">return</span> b;
+    }
+    
+    <span class="keyword-directive">void</span> <span class="ST0">crearBoleto</span>() <span class="keyword-directive">throws</span> IOException{
+<span class="comment">/*inicia la recoleccion de datos para la cracion del boleto y su</span>
+<span class="comment"> * correspondiente registro en archivo*/</span>
+        String nomArch = <span class="character">&quot;</span><span class="character">boletos</span><span class="character">&quot;</span>;
+<span class="comment">/*se inicializa la variable para evitar que se cree un archivo con</span>
+<span class="comment"> * nombre incorrecto*/</span>
+        <span class="ST1">si</span> = <span class="keyword-directive">false</span>;
+        
+        <span class="keyword-directive">do</span>{
+            System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Nuemro de vuelo a vender: </span><span class="character">&quot;</span>);
+            <span class="ST1">aux</span> = <span class="ST1">br</span>.readLine();
+            <span class="keyword-directive">if</span>(<span class="ST1">v</span>.verificarVuelo(<span class="ST1">aux</span>)){
+                <span class="ST1">nVuel</span> = <span class="ST1">aux</span>;
+                nomArch = <span class="character">&quot;</span><span class="character">boletos</span><span class="character">&quot;</span>+<span class="ST1">nVuel</span>;
+<span class="comment">/*se crea un archivo con el nombre boleto y la referencia del numero de vuelo*/</span>
+                <span class="ST1">man</span>.crear(nomArch);
+                <span class="ST1">nBoleto</span> = Integer.<span class="ST3">toString</span>(<span class="ST1">man</span>.buscar(nomArch)+1);
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Venta de boleto para el vuelo nº </span><span class="ST4">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+<span class="ST1">nVuel</span>+<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[30m.</span><span class="character">&quot;</span>);
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[30mBoleto #</span><span class="ST4">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+<span class="ST1">nBoleto</span>+<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[30m.</span><span class="character">&quot;</span>);
+                System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Cedula: </span><span class="character">&quot;</span>);
+                <span class="ST1">ci</span> = <span class="ST1">br</span>.readLine();
+                String[] ver = <span class="ST1">man</span>.buscar(<span class="character">&quot;</span><span class="character">cliente</span><span class="character">&quot;</span>, <span class="ST1">ci</span>);
+                
+                <span class="keyword-directive">if</span>(ver!=<span class="keyword-directive">null</span>){
+                    <span class="keyword-directive">if</span>(ver[0].equals(<span class="ST1">ci</span>)){
+                            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[30mNombre:</span><span class="ST4">\t</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+ver[1]);
+                            <span class="ST1">nom</span> = ver[1];
+                            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[30mApellido:</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+ver[2]);
+                            <span class="ST1">ape</span> = ver[2];
+                            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[30mTelefono:</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+ver[3]);
+                            <span class="ST1">telf</span> = ver[3];
+                            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[30mDireccion:</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+ver[4]);
+                            <span class="ST1">dir</span> = ver[4];
+                            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[31mCliente encontrado!!!</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>);
+                            
+                            <span class="ST1">si</span> = <span class="keyword-directive">true</span>;
+                    }<span class="keyword-directive">else</span>{
+                            String[] datos = <span class="ST1">c</span>.pedirDatos2();
+                            <span class="ST1">nom</span> = datos[0]; <span class="ST1">ape</span> = datos[1]; <span class="ST1">telf</span> = datos[2]; <span class="ST1">dir</span> = datos[3];
+                            String data = <span class="ST1">ci</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">nom</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">ape</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">telf</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">dir</span>;
+                            <span class="ST1">man</span>.guardar(<span class="character">&quot;</span><span class="character">cliente</span><span class="character">&quot;</span>, data);
+                            <span class="ST1">si</span> = <span class="keyword-directive">true</span>;
+                    }
+                    
+                }<span class="keyword-directive">else</span>{
+                    String[] datos = <span class="ST1">c</span>.pedirDatos2();
+                    <span class="ST1">nom</span> = datos[0]; <span class="ST1">ape</span> = datos[1]; <span class="ST1">telf</span> = datos[2]; <span class="ST1">dir</span> = datos[3];
+                    String data = <span class="ST1">ci</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">nom</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">ape</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">telf</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">dir</span>;
+                    <span class="ST1">man</span>.guardar(<span class="character">&quot;</span><span class="character">cliente</span><span class="character">&quot;</span>, data);
+                    <span class="ST1">si</span> = <span class="keyword-directive">true</span>;
+                }
+            }<span class="keyword-directive">else</span>{
+                System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">No se ha creado el vuelo.</span><span class="ST4">\n</span><span class="character">&quot;</span>
+                        + <span class="character">&quot;</span><span class="character">Desea crear un nuevo vuelo? (s/n): </span><span class="character">&quot;</span>);
+                String aux1 = <span class="ST1">br</span>.readLine();
+                <span class="keyword-directive">if</span>(aux1.equals(<span class="character">&quot;</span><span class="character">s</span><span class="character">&quot;</span>)){
+                    <span class="ST1">v</span>.crearVuelo();
+                    <span class="ST1">si</span> = <span class="keyword-directive">false</span>;
+                }<span class="keyword-directive">else</span>{
+                    <span class="ST1">si</span> = <span class="keyword-directive">true</span>;
+                }
+            }
+        }<span class="keyword-directive">while</span>(!<span class="ST1">si</span>);
+        
+        <span class="ST1">v</span>.disponibilidad(<span class="ST1">nVuel</span>);
+
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Asiento</span><span class="character">&quot;</span>);
+        <span class="keyword-directive">do</span>{
+            System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Linea: </span><span class="character">&quot;</span>);
+            <span class="ST1">aux</span> = <span class="ST1">br</span>.readLine();
+            <span class="ST1">fil</span> = Integer.<span class="ST3">parseInt</span>(<span class="ST1">aux</span>);
+            <span class="ST1">tarifa</span> = tarifaBase(<span class="ST1">nVuel</span>);
+            <span class="keyword-directive">if</span>((<span class="ST1">fil</span>&gt;0)&amp;&amp;(<span class="ST1">fil</span>&lt;17)){
+                <span class="keyword-directive">if</span>(<span class="ST1">fil</span>&lt;3){
+                    <span class="ST1">tarifa</span> += <span class="ST1">tarifa</span>*0.25; <span class="ST1">clase</span> = <span class="character">&quot;</span><span class="character">A</span><span class="character">&quot;</span>;
+                    <span class="ST1">si</span> = <span class="keyword-directive">true</span>;
+                }
+                <span class="keyword-directive">if</span>((<span class="ST1">fil</span>&gt;=3)&amp;&amp;(<span class="ST1">fil</span>&lt;8)){
+                    <span class="ST1">tarifa</span> += <span class="ST1">tarifa</span>*0.15; <span class="ST1">clase</span> = <span class="character">&quot;</span><span class="character">B</span><span class="character">&quot;</span>;
+                    <span class="ST1">si</span> = <span class="keyword-directive">true</span>;
+                }
+                <span class="keyword-directive">if</span>(<span class="ST1">fil</span>&gt;=8){
+                    <span class="ST1">tarifa</span> = tarifaBase(<span class="ST1">nVuel</span>); <span class="ST1">clase</span> = <span class="character">&quot;</span><span class="character">C</span><span class="character">&quot;</span>;
+                    <span class="ST1">si</span> = <span class="keyword-directive">true</span>;
+                }
+            }<span class="keyword-directive">else</span>{
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Linea invalida</span><span class="character">&quot;</span>);
+                <span class="ST1">si</span> = <span class="keyword-directive">false</span>;
+            }
+        }<span class="keyword-directive">while</span>(!<span class="ST1">si</span>);
+        
+        <span class="keyword-directive">do</span>{            
+            System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Letra: </span><span class="character">&quot;</span>);
+            <span class="ST1">aux</span> = <span class="ST1">br</span>.readLine();
+            <span class="ST1">asiento</span> = <span class="ST1">fil</span>+<span class="ST1">aux</span>.toUpperCase();
+            <span class="keyword-directive">switch</span>(<span class="ST1">aux</span>.toLowerCase()){
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">a</span><span class="character">&quot;</span> : <span class="ST1">col</span> = 0; <span class="ST1">si</span>=<span class="keyword-directive">true</span>; <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">b</span><span class="character">&quot;</span> : <span class="ST1">col</span> = 1; <span class="ST1">si</span>=<span class="keyword-directive">true</span>; <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">c</span><span class="character">&quot;</span> : <span class="ST1">col</span> = 2; <span class="ST1">si</span>=<span class="keyword-directive">true</span>; <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">d</span><span class="character">&quot;</span> : <span class="ST1">col</span> = 3; <span class="ST1">si</span>=<span class="keyword-directive">true</span>; <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">e</span><span class="character">&quot;</span> : <span class="ST1">col</span> = 4; <span class="ST1">si</span>=<span class="keyword-directive">true</span>; <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">f</span><span class="character">&quot;</span> : <span class="ST1">col</span> = 5; <span class="ST1">si</span>=<span class="keyword-directive">true</span>; <span class="keyword-directive">break</span>;
+                <span class="keyword-directive">default</span>:
+                    System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Letra invalida.</span><span class="character">&quot;</span>);
+                    <span class="ST1">si</span> = <span class="keyword-directive">false</span>; <span class="keyword-directive">break</span>;
+            }
+            
+        }<span class="keyword-directive">while</span>(!<span class="ST1">si</span>);
+        
+        String data = <span class="ST1">nBoleto</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">nVuel</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">ci</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+(<span class="ST1">fil</span>-1)+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">col</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">clase</span>+<span class="character">&quot;</span><span class="character">-</span><span class="character">&quot;</span>+<span class="ST1">tarifa</span>;
+        <span class="ST1">man</span>.guardar(nomArch, data);
+        
+        imprimirBoleto(<span class="ST1">nBoleto</span>, <span class="ST1">nVuel</span>, <span class="ST1">ci</span>);
+    }
+    
+    <span class="keyword-directive">void</span> <span class="ST0">imprimirBoleto</span>(String Bol, String Vuel, String CI){
+        String[] vuelo= <span class="ST1">man</span>.buscar(<span class="character">&quot;</span><span class="character">vuelo</span><span class="character">&quot;</span>, Vuel);
+        String[] cliente= <span class="ST1">man</span>.buscar(<span class="character">&quot;</span><span class="character">cliente</span><span class="character">&quot;</span>, CI);
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[31m-----------------------------------------------------------</span><span class="character">&quot;</span>);
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[31mBoleto</span><span class="ST4">\t</span><span class="character">#</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+Bol+<span class="character">&quot;</span><span class="character">.</span><span class="ST4">\t</span><span class="ST4">\t</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[31mVuelo</span><span class="ST4">\t</span><span class="character">#</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+<span class="ST1">nVuel</span>);
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[31mNombre:</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+cliente[2]+<span class="character">&quot;</span><span class="character">, </span><span class="character">&quot;</span>+cliente[1]+<span class="character">&quot;</span><span class="ST4">\t</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[31mFecha de Vuelo:</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+vuelo[1]);
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[31mCedula:</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+cliente[0]+<span class="character">&quot;</span><span class="ST4">\t</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[31mHora de Vuelo:</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+vuelo[2]+<span class="character">&quot;</span><span class="character">.</span><span class="character">&quot;</span>);
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[31mClase:</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+<span class="ST1">clase</span>+<span class="character">&quot;</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[31mAsiento:</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+<span class="ST1">asiento</span>+<span class="character">&quot;</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[31mPrecio:</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+<span class="ST1">tarifa</span>);
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[31mCiudad origen:</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+vuelo[3]+<span class="character">&quot;</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[31mCiudad destino:</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+vuelo[4]);
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[31m-----------------------------------------------------------</span><span class="character">&quot;</span>);
+    }
+    
+    <span class="keyword-directive">void</span> <span class="ST0">imprimirBoleto</span>() <span class="keyword-directive">throws</span> IOException{
+        <span class="keyword-directive">int</span> i = 1;
+        System.<span class="ST2">out</span>.print(<span class="character">&quot;</span><span class="character">Introduzca numero de vuelo a consultar: </span><span class="character">&quot;</span>);
+        String n = <span class="ST1">br</span>.readLine();
+        String[] vuelo= <span class="ST1">man</span>.buscar(<span class="character">&quot;</span><span class="character">vuelo</span><span class="character">&quot;</span>, n);
+        
+        <span class="keyword-directive">while</span>(<span class="keyword-directive">true</span>){
+            <span class="keyword-directive">if</span>(vuelo==<span class="keyword-directive">null</span>){
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[31m-----------------------------------------------------------</span><span class="character">&quot;</span>);
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">El vuelo #</span><span class="character">&quot;</span>+n+<span class="character">&quot;</span><span class="character"> no existe.</span><span class="character">&quot;</span>);
+                <span class="keyword-directive">break</span>;
+            }
+            String[] boleto = <span class="ST1">man</span>.buscar(<span class="character">&quot;</span><span class="character">boletos</span><span class="character">&quot;</span>+n, Integer.<span class="ST3">toString</span>(i));
+            i++;
+            <span class="keyword-directive">if</span>(boleto!=<span class="keyword-directive">null</span>){
+                String[] cliente= <span class="ST1">man</span>.buscar(<span class="character">&quot;</span><span class="character">cliente</span><span class="character">&quot;</span>, boleto[2]);
+                String aux1 = <span class="character">&quot;&quot;</span>;
+
+                <span class="keyword-directive">switch</span>(boleto[4]){
+                    <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">0</span><span class="character">&quot;</span> : aux1 = <span class="character">&quot;</span><span class="character">A</span><span class="character">&quot;</span>; <span class="ST1">si</span>=<span class="keyword-directive">true</span>; <span class="keyword-directive">break</span>;
+                    <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">1</span><span class="character">&quot;</span> : aux1 = <span class="character">&quot;</span><span class="character">B</span><span class="character">&quot;</span>; <span class="ST1">si</span>=<span class="keyword-directive">true</span>; <span class="keyword-directive">break</span>;
+                    <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">2</span><span class="character">&quot;</span> : aux1 = <span class="character">&quot;</span><span class="character">C</span><span class="character">&quot;</span>; <span class="ST1">si</span>=<span class="keyword-directive">true</span>; <span class="keyword-directive">break</span>;
+                    <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">3</span><span class="character">&quot;</span> : aux1 = <span class="character">&quot;</span><span class="character">D</span><span class="character">&quot;</span>; <span class="ST1">si</span>=<span class="keyword-directive">true</span>; <span class="keyword-directive">break</span>;
+                    <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">4</span><span class="character">&quot;</span> : aux1 = <span class="character">&quot;</span><span class="character">E</span><span class="character">&quot;</span>; <span class="ST1">si</span>=<span class="keyword-directive">true</span>; <span class="keyword-directive">break</span>;
+                    <span class="keyword-directive">case</span> <span class="character">&quot;</span><span class="character">5</span><span class="character">&quot;</span> : aux1 = <span class="character">&quot;</span><span class="character">F</span><span class="character">&quot;</span>; <span class="ST1">si</span>=<span class="keyword-directive">true</span>; <span class="keyword-directive">break</span>;
+                }
+
+                String lugar = (Integer.<span class="ST3">parseInt</span>(boleto[3])+1)+aux1+<span class="character">&quot;&quot;</span>;
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[31m-----------------------------------------------------------</span><span class="character">&quot;</span>);
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[31mBoleto</span><span class="ST4">\t</span><span class="character">#</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+boleto[1]+<span class="character">&quot;</span><span class="character">.</span><span class="ST4">\t</span><span class="ST4">\t</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[31mVuelo</span><span class="ST4">\t</span><span class="character">#</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+n);
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[31mNombre:</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+cliente[2]+<span class="character">&quot;</span><span class="character">, </span><span class="character">&quot;</span>+cliente[1]+<span class="character">&quot;</span><span class="ST4">\t</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[31mFecha de Vuelo:</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+vuelo[1]);
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[31mCedula:</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+cliente[0]+<span class="character">&quot;</span><span class="ST4">\t</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[31mHora de Vuelo:</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+vuelo[2]+<span class="character">&quot;</span><span class="character">.</span><span class="character">&quot;</span>);
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[31mClase:</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+boleto[5]+<span class="character">&quot;</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[31mAsiento:</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+lugar+<span class="character">&quot;</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[31mPrecio:</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+boleto[6]);
+                System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[31mCiudad origen:</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+vuelo[3]+<span class="character">&quot;</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[31mCiudad destino:</span><span class="ST4">\t</span><span class="ST4">\033</span><span class="character">[30m</span><span class="character">&quot;</span>+vuelo[4]);
+            }<span class="keyword-directive">else</span>{
+                <span class="keyword-directive">break</span>;
+            }
+            
+        }
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST4">\033</span><span class="character">[31m-----------------------------------------------------------</span><span class="character">&quot;</span>);
+    }
+}
+
+</pre>
+
+<table width="100%"><tr><td align="center">Reportes.java</td></tr></table>
+<pre>
+<span class="comment">/*Generacion de reportes de ventas de voletos*/</span>
+<span class="keyword-directive">package</span> newairlineseller;
+
+<span class="keyword-directive">import</span> java.io.File;
+<span class="keyword-directive">import</span> java.io.IOException;
+
+<span class="keyword-directive">public</span> <span class="keyword-directive">class</span> <span class="ST0">Reportes</span> {
+    Manejador <span class="ST1">man</span> = <span class="keyword-directive">new</span> Manejador();
+    
+    <span class="keyword-directive">double</span>[] <span class="ST0">sumarMontos</span>() <span class="keyword-directive">throws</span> IOException{
+        <span class="keyword-directive">double</span>[] monto = {0,0,0,0,0,0,0,0}, datos;
+        <span class="keyword-directive">int</span> i=1;
+        
+        <span class="keyword-directive">while</span>(<span class="keyword-directive">new</span> File(<span class="character">&quot;</span><span class="character">boletos</span><span class="character">&quot;</span>+i+<span class="character">&quot;</span><span class="character">.txt</span><span class="character">&quot;</span>).exists()){
+            datos = <span class="ST1">man</span>.buscarMontos(i);
+            monto[0] += datos[0];<span class="comment">//total general</span>
+            monto[1] += datos[1];<span class="comment">//total calse A</span>
+            monto[2] += datos[2];<span class="comment">//total calse B</span>
+            monto[3] += datos[3];<span class="comment">//total calse C</span>
+            monto[4] += datos[4];<span class="comment">//total boletos</span>
+            monto[5] += datos[5];<span class="comment">//total boletos A</span>
+            monto[6] += datos[6];<span class="comment">//total boletos B</span>
+            monto[7] += datos[7];<span class="comment">//total boletos C</span>
+            
+            i++;
+        }
+        <span class="keyword-directive">return</span> monto;
+    }
+    
+    <span class="keyword-directive">void</span> <span class="ST0">imprimirTotal</span>() <span class="keyword-directive">throws</span> IOException{
+        <span class="keyword-directive">double</span>[] total = sumarMontos();
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30mEl monto total recaudado en </span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+(<span class="keyword-directive">int</span>)total[4]
+                +<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30m boletos vendidos es: </span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+total[0]+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30m</span><span class="character">&quot;</span>);
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30mEl monto total recaudado en la clase A con </span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>
+                +(<span class="keyword-directive">int</span>)total[5]+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30m boletos es: </span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+total[1]+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30m</span><span class="character">&quot;</span>);
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30mEl monto total recaudado en la clase B con </span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>
+                +(<span class="keyword-directive">int</span>)total[6]+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30m boletos es: </span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+total[2]+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30m</span><span class="character">&quot;</span>);
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30mEl monto total recaudado en la clase C con </span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>
+                +(<span class="keyword-directive">int</span>)total[7]+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30m boletos es: </span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+total[3]+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30m</span><span class="character">&quot;</span>);
+    }
+    
+    <span class="keyword-directive">void</span> <span class="ST0">vueloVendidos</span>() <span class="keyword-directive">throws</span> IOException{
+        <span class="keyword-directive">double</span>[] datos;
+        <span class="keyword-directive">int</span> i = 1;
+        <span class="keyword-directive">int</span> v = <span class="ST1">man</span>.buscar(<span class="character">&quot;</span><span class="character">vuelo</span><span class="character">&quot;</span>);
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[36m--------------------------------------</span><span class="ST3">\033</span><span class="character">[30m</span><span class="character">&quot;</span>);
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Existen </span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+v+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30m vuelos creados.</span><span class="character">&quot;</span>);
+        <span class="keyword-directive">while</span> (<span class="keyword-directive">new</span> File(<span class="character">&quot;</span><span class="character">boletos</span><span class="character">&quot;</span>+i+<span class="character">&quot;</span><span class="character">.txt</span><span class="character">&quot;</span>).exists()){
+            datos = <span class="ST1">man</span>.buscarMontos(i);
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[36m--------------------------------------</span><span class="ST3">\033</span><span class="character">[30m</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Para el vuelo #</span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+i+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30m, se vendieron:</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Clase A </span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+(<span class="keyword-directive">int</span>)datos[5]+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30m boletos, que suman : </span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+datos[1]+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30m Bs.</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Clase B </span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+(<span class="keyword-directive">int</span>)datos[6]+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30m boletos, que suman : </span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+datos[2]+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30m Bs.</span><span class="character">&quot;</span>);
+            System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="character">Clase C </span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+(<span class="keyword-directive">int</span>)datos[7]+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30m boletos, que suman : </span><span class="ST3">\033</span><span class="character">[31m</span><span class="character">&quot;</span>+datos[3]+<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[30m Bs.</span><span class="character">&quot;</span>);
+            i++;
+        }
+        System.<span class="ST2">out</span>.println(<span class="character">&quot;</span><span class="ST3">\033</span><span class="character">[36m--------------------------------------</span><span class="ST3">\033</span><span class="character">[30m</span><span class="character">&quot;</span>);
+    }
+}
+
+</pre>
+</body>
+</html>

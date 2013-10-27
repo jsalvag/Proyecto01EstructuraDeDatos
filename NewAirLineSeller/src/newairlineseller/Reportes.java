@@ -43,17 +43,17 @@ public class Reportes {
         double[] datos;
         int i = 1;
         int v = man.buscar("vuelo");
-        System.out.println("--------------------------------------------------------");
+        System.out.println("\033[36m--------------------------------------\033[30m");
         System.out.println("Existen \033[31m"+v+"\033[30m vuelos creados.");
         while (new File("boletos"+i+".txt").exists()){
             datos = man.buscarMontos(i);
-            System.out.println("--------------------------------------------------------");
+        System.out.println("\033[36m--------------------------------------\033[30m");
             System.out.println("Para el vuelo #\033[31m"+i+"\033[30m, se vendieron:");
-            System.out.println("Clase A: \033[31m"+(int)datos[5]+"\033[30m, que suman : \033[31m"+datos[1]+"\033[30m Bs.");
-            System.out.println("Clase B: \033[31m"+(int)datos[6]+"\033[30m, que suman : \033[31m"+datos[2]+"\033[30m Bs.");
-            System.out.println("Clase C: \033[31m"+(int)datos[7]+"\033[30m, que suman : \033[31m"+datos[3]+"\033[30m Bs.");
-            System.out.println("--------------------------------------------------------");
+            System.out.println("Clase A \033[31m"+(int)datos[5]+"\033[30m boletos, que suman : \033[31m"+datos[1]+"\033[30m Bs.");
+            System.out.println("Clase B \033[31m"+(int)datos[6]+"\033[30m boletos, que suman : \033[31m"+datos[2]+"\033[30m Bs.");
+            System.out.println("Clase C \033[31m"+(int)datos[7]+"\033[30m boletos, que suman : \033[31m"+datos[3]+"\033[30m Bs.");
             i++;
         }
+        System.out.println("\033[36m--------------------------------------\033[30m");
     }
 }
